@@ -16,10 +16,21 @@ export function Form({ csrfToken }: { csrfToken: string }) {
     <form action={formAction} className="flex flex-col gap-3">
       <h3 className="text-xl font-semibold">CSRF Prevention</h3>
       <WithLabel id="firstName" label="First Name">
-        <Input required name="first_name" placeholder="John" />
+        <Input
+          required
+          name="first_name"
+          placeholder="John"
+          defaultValue={response?.fields?.first_name}
+        />
       </WithLabel>
       <WithLabel id="lastName" label="Last Name">
-        <Input required id="lastName" name="last_name" placeholder="Doe" />
+        <Input
+          required
+          id="lastName"
+          name="last_name"
+          placeholder="Doe"
+          defaultValue={response?.fields?.last_name}
+        />
       </WithLabel>
       <input type="hidden" name="csrf_token" value={csrfToken} />
       <Button className="w-full">Submit</Button>

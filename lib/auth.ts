@@ -11,10 +11,14 @@ export const authenticateUser = async (prevState: string, input: FormData) => {
   try {
     data = schema.parse(Object.fromEntries(input));
   } catch {
-    return { ok: false, message: "Failed to parse request." };
+    return { ok: false, message: "Failed to parse request.", fields: data };
   }
   if (!csrf.verify(process.env.CSRF_TOKEN_SECRET!, data.csrf_token)) {
-    return { ok: false, message: "Unauthorized request." };
+    return { ok: false, message: "Unauthorized request.", fields: data };
   }
-  return { ok: true, message: "The form was successfully submitted." };
+  return {
+    ok: true,
+    message: "The form was successfully submitted.",
+    fields: data,
+  };
 };
